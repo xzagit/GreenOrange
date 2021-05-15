@@ -1,11 +1,13 @@
 package com.Client.GreenOrange.Find_ing;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class Client {
+public class Client2 {
     @SuppressWarnings("InfiniteLoopStatement")
 
     public static void main(String[] args) throws IOException{
