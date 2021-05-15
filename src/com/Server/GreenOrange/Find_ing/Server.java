@@ -10,6 +10,7 @@ public class Server {
         System.out.println("Server Running...");
         while (true) {
             Socket socket = serverSocket.accept();
+            System.out.println(socket.getLocalSocketAddress());
             Thread t = new Handler(socket);
             t.start();
         }

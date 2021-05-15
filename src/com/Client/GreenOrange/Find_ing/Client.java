@@ -10,7 +10,7 @@ public class Client {
 
     public static void main(String[] args) throws IOException{
 
-        String ServerAddress = "192.168.47.1";
+        String ServerAddress = "172.17.49.246";
         Socket socket = new Socket(ServerAddress, 10828);
 
         try (OutputStream oup = socket.getOutputStream()) {
