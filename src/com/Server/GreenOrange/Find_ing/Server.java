@@ -1,4 +1,4 @@
-package com.Server.GreenOrange.Fing_ing;
+package com.Server.GreenOrange.Find_ing;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -7,9 +7,10 @@ public class Server {
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(10828);
+        System.out.println("Server Running...");
         while (true) {
             Socket socket = serverSocket.accept();
-            Thread t = new Handle(socket);
+            Thread t = new Handler(socket);
             t.start();
         }
     }
