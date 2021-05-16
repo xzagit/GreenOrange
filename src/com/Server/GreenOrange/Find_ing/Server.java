@@ -10,10 +10,13 @@ public class Server {
         System.out.println("Server Running...");
         while (true) {
             Socket socket = serverSocket.accept();
-            IpAddress.addIpaddress(socket.getLocalSocketAddress().toString());
-            System.out.println(socket.getLocalSocketAddress());
+            IpAddress.addIpaddress(socket.getRemoteSocketAddress().toString());
+            System.out.println(socket.getRemoteSocketAddress());
             Thread t = new Handler(socket);
             t.start();
+            System.out.println(MessagePool.getMessage());
         }
     }
 }
+
+

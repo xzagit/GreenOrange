@@ -9,7 +9,7 @@ public class IpAddress {
         return ipaddress;
     }
 
-    public static void addIpaddress(String ip) {
+    public static synchronized void addIpaddress(String ip) {
         ipaddress.add(ip);
     }
 }
