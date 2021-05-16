@@ -3,6 +3,7 @@ package com.Server.GreenOrange.Find_ing;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 @SuppressWarnings("InfiniteLoopStatement")
 
@@ -35,7 +36,9 @@ public class Handler extends Thread{
 
             System.out.println("客户端信息：" + inp);
 
-            outputStream.write(("ServerResponse回应: "+inp).getBytes(StandardCharsets.UTF_8));
+            System.out.println("请输入回复：");
+            String rens = new Scanner(System.in).nextLine();
+            outputStream.write(("ServerResponse回应: "+rens).getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
         }
 
