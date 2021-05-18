@@ -27,18 +27,21 @@ public class Handler extends Thread{
     public void handle(InputStream inputStream, OutputStream outputStream) throws IOException{
 
         System.out.println("连接成功现在可以开始发消息了");
+        String font = "init";
 
         while (true) {
-        byte[] bytes = new byte[4096];
-        int len;
+            byte[] bytes = new byte[4096];
+            int len;
             len = inputStream.read(bytes);
             String inp = new String(bytes, 0, len);
 
-            System.out.println("客户端信息：" + inp);
-
+            if (!font.equals(inp)) {
+                System.out.println("客户端信息：" + inp);
+                font = inp;
+            }
             System.out.println("请输入回复：");
             String rens = new Scanner(System.in).nextLine();
-            outputStream.write(("ServerResponse回应: "+rens).getBytes(StandardCharsets.UTF_8));
+            outputStream.write(rens.getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
         }
 

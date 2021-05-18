@@ -4,8 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
+
+
+import java.util.Timer;
+
+
 
 public class MainFrame {
+    JTextArea OnlyRead = new JTextArea(3000,30);
+
+    public String Test = "hello";
+    public String message;
+
     public MainFrame() {
         JFrame jf = new JFrame("平平无奇的聊天框");
         jf.setSize(300, 500);
@@ -22,6 +33,19 @@ public class MainFrame {
 
         jf.setContentPane(panel);
         jf.setVisible(true);
+
+    }
+
+
+
+    public void time() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                OnlyRead.append("888");
+            }
+        }, 10, 100);
     }
 
     public JPanel setPanel(JPanel panel){
@@ -34,10 +58,8 @@ public class MainFrame {
         panel.add(lb2);
 
 
-        //文本区域
-        JTextArea OnlyRead = new JTextArea(3000,30);
+        // TODO 文本区域
         OnlyRead.setLineWrap(true);
-        OnlyRead.setText("这是聊天记录区域");
         OnlyRead.setFont(new  Font("微软雅黑",  1,  15));
         OnlyRead.setEditable(false);
         OnlyRead.setBackground(Color.decode("#DBD1C1"));
@@ -46,10 +68,12 @@ public class MainFrame {
         panel.add(scroll);
 
 
+
+
         //输入的文本区域
         JTextArea ta = new JTextArea(8,25);
         ta.setLineWrap(true);
-        ta.setText("这是打字区域");
+        ta.setText("这里是文本输入区域");
         ta.setBackground(Color.decode("#F3F0EB"));
         ta.setFont(new  Font("微软雅黑",  4,  15));
         ta.setBounds(20, 320, 250, 100);
@@ -75,11 +99,11 @@ public class MainFrame {
         jb1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                Test = ta.getText();
             }
         });
 
-
+        OnlyRead.append("11123");
         panel.add(jb1);
         panel.add(jb2);
 
