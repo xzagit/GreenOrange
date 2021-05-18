@@ -36,7 +36,7 @@ public class Handler extends Thread{
             String inp = new String(bytes, 0, len);
 
             if (!font.equals(inp)) {
-                System.out.println("客户端信息：" + inp);
+                System.out.println(inp);
                 font = inp;
             }
             System.out.println("请输入回复：");
