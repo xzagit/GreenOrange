@@ -4,20 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.TimerTask;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
-
-import java.util.Timer;
-
-
+@SuppressWarnings("InfiniteLoopStatement")
 
 public class MainFrame {
-    JTextArea OnlyRead = new JTextArea(3000,30);
+
+    JTextArea  OnlyRead = new JTextArea(3000,30);
 
     public String Test = "hello";
     public String message;
 
-    public MainFrame() {
+    public MainFrame() throws IOException {
+
         JFrame jf = new JFrame("平平无奇的聊天框");
         jf.setSize(300, 500);
         jf.setLocationRelativeTo(null);
@@ -34,33 +37,49 @@ public class MainFrame {
         jf.setContentPane(panel);
         jf.setVisible(true);
 
-    }
+        String ServerAddress = "172.17.49.246";
+        Socket socket = new Socket(ServerAddress, 10828);
+        try (OutputStream oup = socket.getOutputStream()) {
+            try (InputStream inp = socket.getInputStream()) {
 
+                while (true){
+                    oup.write(Test.getBytes(StandardCharsets.UTF_8));
+                    oup.flush();
+                    byte[] bytes = new byte[4096];
+                    int len = inp.read(bytes);
+                    String response = new String(bytes, 0, len);
+                    message = response;
+//                    System.out.println(frame.message);
+                    if (response.equals(" ")) continue;
+                    System.out.println(response);
+                    OnlyRead.append("服务端："+response+"\n");
+                }
 
-
-    public void time() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                OnlyRead.append("888");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }, 10, 100);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
+
 
     public JPanel setPanel(JPanel panel){
         JLabel lb1 = new JLabel("172.17.49.246");
         JLabel lb2 = new JLabel("----------------------------------------------------------------------------------");
         lb1.setBounds(90, 10, 200, 20);
         lb2.setBounds(0, 28, 300, 10);
-        lb1.setFont(new  Font("华文行楷",  1,  15));
+        lb1.setFont(new  Font("华文行楷", Font.BOLD,  15));
         panel.add(lb1);
         panel.add(lb2);
 
 
         // TODO 文本区域
         OnlyRead.setLineWrap(true);
-        OnlyRead.setFont(new  Font("微软雅黑",  1,  15));
+        OnlyRead.setFont(new  Font("微软雅黑", Font.BOLD,  15));
         OnlyRead.setEditable(false);
         OnlyRead.setBackground(Color.decode("#DBD1C1"));
         JScrollPane scroll = new JScrollPane(OnlyRead);
@@ -89,21 +108,14 @@ public class MainFrame {
         jb1.setFont(new Font("微软雅黑", Font.BOLD, 11));
         jb2.setFont(new Font("微软雅黑", Font.BOLD, 11));
 
-        jb2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
+        jb2.addActionListener(e -> System.exit(0));
+
+        jb1.addActionListener(e -> {
+            Test = ta.getText();
+            ta.setText("");
+            OnlyRead.append("你自己: " + Test + "\n");
         });
 
-        jb1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Test = ta.getText();
-            }
-        });
-
-        OnlyRead.append("11123");
         panel.add(jb1);
         panel.add(jb2);
 
@@ -124,7 +136,7 @@ public class MainFrame {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, IOException {
         new MainFrame();
     }
 }
