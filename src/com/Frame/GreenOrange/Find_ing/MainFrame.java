@@ -2,8 +2,6 @@ package com.Frame.GreenOrange.Find_ing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -77,7 +75,6 @@ public class MainFrame {
         panel.add(lb2);
 
 
-        // TODO 文本区域
         OnlyRead.setLineWrap(true);
         OnlyRead.setFont(new  Font("微软雅黑", Font.BOLD,  15));
         OnlyRead.setEditable(false);
