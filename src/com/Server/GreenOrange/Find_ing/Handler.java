@@ -28,6 +28,7 @@ public class Handler extends Thread{
 
         System.out.println("连接成功现在可以开始发消息了");
         String font = "init";
+        String stainf = " ";
 
         while (true) {
             byte[] bytes = new byte[4096];
