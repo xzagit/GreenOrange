@@ -2,6 +2,7 @@ package com.Server.GreenOrange.Find_ing;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -18,6 +19,9 @@ public class Handler extends Thread{
         try (InputStream inp = this.sock.getInputStream()) {
             try (final OutputStream oup = this.sock.getOutputStream()) {
                 handle(inp, oup);
+            }
+            catch (SocketException e){
+                System.out.println(sock.getRemoteSocketAddress()+"退出连接！");
             }
         } catch (IOException e) {
             e.printStackTrace();

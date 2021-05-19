@@ -4,6 +4,8 @@ import com.Button.GreenOrange.Find_ing.MyButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,22 +15,12 @@ import java.nio.charset.StandardCharsets;
 @SuppressWarnings("InfiniteLoopStatement")
 
 public class MainFrame {
-<<<<<<< HEAD
     public JTextArea OnlyRead;
     public String Test = "hello";
     public String message;
 
-    public void mainframe() {
-=======
+    public void mainframe() throws IOException {
 
-    JTextArea  OnlyRead = new JTextArea(3000,30);
-
-    public String Test = "hello";
-    public String message;
-
-    public MainFrame() throws IOException {
-
->>>>>>> refs/remotes/origin/OnlyOneClient
         JFrame jf = new JFrame("平平无奇的聊天框");
         jf.setSize(300, 500);
         jf.setLocationRelativeTo(null);
@@ -85,10 +77,7 @@ public class MainFrame {
         panel.add(lb2);
 
 
-<<<<<<< HEAD
         OnlyRead = new JTextArea(3000,30);
-=======
->>>>>>> refs/remotes/origin/OnlyOneClient
         OnlyRead.setLineWrap(true);
         OnlyRead.setFont(new  Font("微软雅黑", Font.BOLD,  15));
         OnlyRead.setEditable(false);
@@ -166,7 +155,11 @@ public class MainFrame {
         btn_show.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainframe();
+                try {
+                    mainframe();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
 
@@ -178,13 +171,8 @@ public class MainFrame {
 
     }
 
-<<<<<<< HEAD
     public static void main(String[] args) {
-//        new MainFrame().mainframe();
         new MainFrame().newFrame("哦豁，服务器没有打开哟，先通知管理员打开服务器");
-=======
-    public static void main(String[] args) throws InterruptedException, IOException {
         new MainFrame();
->>>>>>> refs/remotes/origin/OnlyOneClient
     }
 }
