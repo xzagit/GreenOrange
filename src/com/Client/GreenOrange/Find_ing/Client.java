@@ -12,7 +12,7 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         try {
-            String ServerAddress = "172.17.49.246";
+            String ServerAddress = "192.168.0.12";
             Socket socket = new Socket(ServerAddress, 10828);
 
             MainFrame frame = new MainFrame();
