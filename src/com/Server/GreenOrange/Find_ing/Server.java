@@ -6,7 +6,7 @@ import java.net.Socket;
 public class Server {
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(10828);
+        ServerSocket serverSocket = new ServerSocket(10820);
         System.out.println("Server Running...");
         while (true) {
             Socket socket = serverSocket.accept();
